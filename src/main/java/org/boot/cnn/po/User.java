@@ -11,6 +11,7 @@ public class User {
 		private int age;// 用户年龄
 		private String sex;// 性别
 		private Date birthday;// 生日
+		private String address; // 地址
 		public int getId() {
 			return id;
 		}
@@ -53,10 +54,16 @@ public class User {
 		public void setBirthday(Date birthday) {
 			this.birthday = birthday;
 		}
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
 		@Override
 		public String toString() {
 			return "User [id=" + id + ", loginName=" + loginName + ", password=" + password + ", name=" + name
-					+ ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + "]";
+					+ ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address + "]";
 		}
 		
 }
