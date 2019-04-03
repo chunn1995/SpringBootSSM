@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType：指定输入参数的类型是pojo（包括用户信息）
 		#{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值
 	 -->
-	 <insert id="insertUset" parameterType="com.chunn.mybatis.po.User">
+	 <insert id="insertUserInMapper" parameterType="com.chunn.mybatis.po.User">
 	 	<!--自增主键返回 
 	 		将插入数据的主键放回，返回到User对象中
 	 		SELECT LAST_INSERT_ID()：得到刚insert进去记录的主键值，只适用于自增主键
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	<!-- <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
 	 		SELECT uuid()
 	 	</selectKey> -->
-	 	INSERT INTO USER(username,birthday,sex,address) value(#{username},#{birthday},#{sex},#{address})
+	 	INSERT INTO USER(loginName,password,name,age,sex,birthday,address) value(#{loginName},#{password},#{name},#{age},#{sex},#{birthday},#{address})
 	 </insert>
 	 
 	 <!-- 删除用户 
