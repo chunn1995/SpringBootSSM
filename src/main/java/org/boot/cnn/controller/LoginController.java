@@ -11,7 +11,7 @@ public class LoginController {
 	UserService userService;
 	
 	public void login() {
-		
+		System.out.println("login");
 	}
 	
 }
