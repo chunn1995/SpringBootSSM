@@ -49,6 +49,7 @@ public class SpringBootSsmApplicationTests {
 			//String birthday = "1995-03-13";
 			//userMapper.insertUser("chunn", "SBqiaowen521", "褚宁宁", 24, 1,sdf.parse(birthday), "河北省承德市");
 			//User user = userMapper.findUserByLoginName("chunn");
+			// 删除
 			userMapper.deleteUserNoBirth();
 			List<User> userList = userMapper.findAll();
 			System.out.println(userList);
