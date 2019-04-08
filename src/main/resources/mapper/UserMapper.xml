@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
-<mapper namespace="org.boot.cnn.dao.UserDao">
+<mapper namespace="org.boot.cnn.po">
 	<!-- 在映射或文件中配置很多sql语句 -->
 	<!-- 需求：通过id查询用户表的记录 -->
 	<!-- 通过select执行数据库查询 id：标识 映射文件中的sql，成为statement的id 将sql语句封装到mappedStatement对象中，所以将id成为statement的id 
@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{}表示一个占位符号 
 		#{id}：其中的id表示接收输入的参数，参数名称就是id，如果输入参数是简单类型，#{}中的参数名可以任意，可以value或其他名称 
 		resultType：指定sql输出结果所映射的java对象类型，select指定resultType表示将单条记录映射成的java对象 -->
-	<select id="findUserById" parameterType="int" resultType="com.chunn.mybatis.po.User">
+	<select id="findUserById" parameterType="int" resultType="org.boot.cnn.po.User">
 		SELECT * FROM USER WHERE id=#{id}
 	</select>
 
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${}表示拼接sql串，将接受到参数的内容不加任何修饰拼接在sql中 
 		使用${}拼接sql，引起sql注入 
 		${value}接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value -->
-	<select id="findUserByName" parameterType="java.lang.String" resultType="com.chunn.mybatis.po.User">
+	<select id="findUserByName" parameterType="java.lang.String" resultType="org.boot.cnn.po.User">
 		SELECT * FROM USER WHERE username LIKE '%${value}%'
 	</select>
 
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType：指定输入参数的类型是pojo（包括用户信息）
 		#{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值
 	 -->
-	 <insert id="insertUserInMapper" parameterType="com.chunn.mybatis.po.User">
+	 <insert id="insertUserInMapper" parameterType="org.boot.cnn.po.User">
 	 	<!--自增主键返回 
 	 		将插入数据的主键放回，返回到User对象中
 	 		SELECT LAST_INSERT_ID()：得到刚insert进去记录的主键值，只适用于自增主键
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	paramterType指定user对象，包括id和更新信息，注意：id必须存在
 	 	#{id}：从输入user对象中获取id属性值
 	  -->
-	  <update id="updateUser" parameterType="com.chunn.mybatis.po.User">
+	  <update id="updateUser" parameterType="org.boot.cnn.po.User">
 	  	update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} 
 	  	where id=#{id}
 	  </update>

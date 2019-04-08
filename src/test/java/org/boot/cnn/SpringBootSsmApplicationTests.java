@@ -1,6 +1,9 @@
 package org.boot.cnn;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.boot.cnn.dao.UserMapper;
 import org.boot.cnn.po.User;
@@ -22,7 +25,7 @@ public class SpringBootSsmApplicationTests {
 	
 	
 	@Test
-	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED) /**事务管理，在执行语句过程中出现异常时，回退。逻辑中之前成功的数据无效。**/
+	//@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED) /**事务管理，在执行语句过程中出现异常时，回退。逻辑中之前成功的数据无效。**/
 	/**
 	 * 隔离级别（Isolation）:隔离级别是指若干个并发的事务之间的隔离程度，与我们开发时候主要相关的场景包括：脏读取、重复读、幻读。
 	 * DEFAULT：这是默认值，表示使用底层数据库的默认隔离级别。对大部分数据库而言，通常这值就是：READ_COMMITTED。
@@ -41,9 +44,18 @@ public class SpringBootSsmApplicationTests {
 	 * NESTED：如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；如果当前没有事务，则该取值等价于REQUIRED。
 	 */
 	public void contextLoads() {
-		userMapper.insertUser("chunn", "SBqiaowen521", "褚宁宁", 24, "女", new Date("1995-03-13"), "河北省承德市");
-		User user = userMapper.findUserByLoginName("chunn");
-		System.out.println(user);
+		try {
+			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			//String birthday = "1995-03-13";
+			//userMapper.insertUser("chunn", "SBqiaowen521", "褚宁宁", 24, 1,sdf.parse(birthday), "河北省承德市");
+			//User user = userMapper.findUserByLoginName("chunn");
+			userMapper.deleteUserNoBirth();
+			List<User> userList = userMapper.findAll();
+			System.out.println(userList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -9,7 +9,7 @@ public class User {
 		private String password;
 		private String name;// 用户姓名
 		private int age;// 用户年龄
-		private String sex;// 性别
+		private int sex;// 性别
 		private Date birthday;// 生日
 		private String address; // 地址
 		public int getId() {
@@ -42,10 +42,10 @@ public class User {
 		public void setAge(int age) {
 			this.age = age;
 		}
-		public String getSex() {
+		public int getSex() {
 			return sex;
 		}
-		public void setSex(String sex) {
+		public void setSex(int sex) {
 			this.sex = sex;
 		}
 		public Date getBirthday() {
