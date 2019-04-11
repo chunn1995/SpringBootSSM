@@ -13,17 +13,19 @@ import org.boot.cnn.po.User;
 @Mapper
 public interface UserMapper {
 
-	@Select("SELECT * FROM USER")
-	List<User> findAll();
-
 	User findUserById(int id);
 
 	User findUserByName(String name);
 	
-	int insertUserInMapper(User user);
+	int insert(User user);
 	
-	boolean deleteUser(int id);
+	void deleteUser(int id);
+	
+	void updateUser(User user);
 
+	@Select("SELECT * FROM USER")
+	List<User> findAllUser();
+	
 	@Select("SELECT * FROM USER WHERE LOGINNAME = #{loginName}")
 	User findUserByLoginName(String loginName);
 	
@@ -34,4 +36,5 @@ public interface UserMapper {
 	
 	@Delete("DELETE FROM USER WHERE BIRTHDAY IS NULL")
 	boolean deleteUserNoBirth();
-}
+	
+	}

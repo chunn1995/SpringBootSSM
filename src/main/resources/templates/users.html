@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p th:text="${u.loginName}"></p>
+	<p th:text="${u.password}"></p>
+	<p th:text="${u.name}"></p>
+	<p th:text="${u.age}"></p>
+	<p th:text="${u.sex}"></p>
+	<p th:text="${u.birthday}"></p>
+	<p th:text="${u.address}"></p>
+
+	<div th:object="${u}">
+		<p th:text="*{loginName}"></p>
+		<p th:text="*{password}"></p>
+		<p th:text="*{name}"></p>
+		<p th:text="*{age}"></p>
+		<p th:utext="*{sex}"></p>
+		<p th:text="*{birthday}"></p>
+		<p th:text="*{address}"></p>
+	</div>
+
+	<form th:action="@{saveUser}" method="post" th:object=${u} th:method="post">
+		<input type="text" th:field="*{loginName}" /> 
+		<input type="text" th:field="*{password}" /> 
+		<input type="text" th:field="*{name}" />
+		<input type="text" th:field="*{age}" /> 
+		<input type="text" th:field="*{sex}" /> 
+		<input type="text" th:field="*{birthday}" /> 
+		<input type="text" th:field="*{address}" /> 
+		<input type="submit" />
+	</form>
+
+	<select>
+		<option>选择框</option>
+		<option th:selected="${u.name eq '褚'}">褚</option>
+		<!-- eq是等于的意思 -->
+		<option th:selected="${u.name eq '褚宁宁'}">褚宁宁</option>
+		<option th:selected="${u.name eq '乔稳'}">乔稳</option>
+	</select>
+
+	<table>
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>年龄备注</th>
+			<th>生日</th>
+		</tr>
+		<tr th:each="person:${ul}">
+			<td th:text="${person.name}"></td>
+			<td th:text="${person.age}"></td>
+			<td th:text="${person.age gt 18} ? 你成熟了 : 你还年轻">18岁</td> <!-- gt是<= -->
+			<td th:text="${#dates.format(person.birthday, 'yyyy-MM-dd hh:mm:ss')}"></td>
+		</tr>
+	</table>
+	<br />
+
+	<br />
+	<div th:switch="${u.loginName}">
+		<p th:case="'lee'">lee</p>
+		<p th:case="A">普通管理员</p>
+		<p th:case="chuningning">超级管理员</p>
+		<p th:case="*">其他用户</p>
+	</div>
+	<br />
+</body>
+</html>

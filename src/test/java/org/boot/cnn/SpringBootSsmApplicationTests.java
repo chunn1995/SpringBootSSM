@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,9 +24,9 @@ public class SpringBootSsmApplicationTests {
 	@Autowired
 	UserMapper userMapper;
 	
-	
 	@Test
-	//@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED) /**事务管理，在执行语句过程中出现异常时，回退。逻辑中之前成功的数据无效。**/
+	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED) /**事务管理，在执行语句过程中出现异常时，回退。逻辑中之前成功的数据无效。**/
+	@Rollback(false)// 单元测试默认会回滚事务，默认值为true，设置成false可取消回滚
 	/**
 	 * 隔离级别（Isolation）:隔离级别是指若干个并发的事务之间的隔离程度，与我们开发时候主要相关的场景包括：脏读取、重复读、幻读。
 	 * DEFAULT：这是默认值，表示使用底层数据库的默认隔离级别。对大部分数据库而言，通常这值就是：READ_COMMITTED。
@@ -45,14 +46,23 @@ public class SpringBootSsmApplicationTests {
 	 */
 	public void contextLoads() {
 		try {
-			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			//String birthday = "1995-03-13";
-			//userMapper.insertUser("chunn", "SBqiaowen521", "褚宁宁", 24, 1,sdf.parse(birthday), "河北省承德市");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String birthday = "2019-03-13";
+			User user = new User();
+			user.setLoginName("zhang3");
+			user.setPassword("password");
+			user.setName("张三");
+			user.setSex(0);
+			user.setAge(20);
+			user.setBirthday(sdf.parse(birthday));
+			user.setAddress("");
+			//userMapper.insertUser("hhh", "SBqiaowen521", "事务测试", 24, 1,sdf.parse(birthday), "北京市海淀区");
 			//User user = userMapper.findUserByLoginName("chunn");
 			// 删除
-			userMapper.deleteUserNoBirth();
-			List<User> userList = userMapper.findAll();
-			System.out.println(userList);
+			//userMapper.deleteUserNoBirth();
+			//User user = userMapper.findUserByName("褚宁宁");
+			//User user1 = userMapper.findUserByLoginName("chunn");
+			//List<User> userList = userMapper.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
