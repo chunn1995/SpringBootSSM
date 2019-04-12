@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller/**自动返回json格式数据**/
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController {
 
 	@Autowired
